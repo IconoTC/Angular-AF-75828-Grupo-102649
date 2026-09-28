@@ -15,11 +15,10 @@ Curso de Angular 22, versión publicada el 3 de Junio de 2026.
 
 ## Día 1 (L-28/09): Introducción a Typescript y Angular
 
-<!-- - Introducción a Angular y su ecosistema.
+- Introducción a Angular y su ecosistema.
 
 - Entornos de desarrollo para Angular: 
   - Node: nvm (Node Version Manager)
-    - Problemas de instalación
   - Visual Studio Code
     - Extensiones recomendadas
 - Instalación de Angular CLI.
@@ -27,17 +26,23 @@ Curso de Angular 22, versión publicada el 3 de Junio de 2026.
   - Creación de un nuevo workspace Angular sin proyecto. `ng new`
   - Creación de un nuevo proyecto (app) Angular. `ng generate app`
   - Estructura de un workspace/proyecto Angular.
-  - Añadiendo ESLint (`ng add`) y Prettier. -->
+  - Añadiendo ESLint (`ng add`) y Prettier.
+  - Estructura de un workspace/proyecto Angular.
 
-- [descanso]: 11:45 - 12:15
-
-
-<!-- - Angular CLI: Comandos básicos.
+- Angular CLI: Comandos básicos.
   - Servidor de desarrollo: `ng serve`.
+
+- [descanso]: 11:30 - 12:00
+
+
+- Angular CLI: Comandos básicos.
   - Testing con Vitest: `ng test`.
   - Testing con Playwright: `ng e2e`.
     - Problemas de versiones. Actualización con Version Lens 
   - Construcción del proyecto: `ng build`.
+  - Despliegue: `ng deploy`. Opciones
+
+<!-- 
 - Generación de componentes: `ng generate`.
   - Elementos de un componente: HTML, CSS, TypeScript. 
   - Template y estilos inline o en ficheros.
