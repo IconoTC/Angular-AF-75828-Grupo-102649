@@ -6,11 +6,11 @@ import { RouterOutlet } from '@angular/router';
   selector: 'ind-root',
   styles: [],
   template: `
-    <h1>Hello, {{ title() }}</h1>
+    <h1>{{ title() }}</h1>
 
     <router-outlet />
   `,
 })
 export class App {
-  protected readonly title = signal('demo-01');
+  protected readonly title = signal('Demo-01');
 }
