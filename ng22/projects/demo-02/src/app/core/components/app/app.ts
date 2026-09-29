@@ -1,13 +1,14 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { CourseItem } from '../../../features/courses/components/course-item/course-item';
-import { CourseItemSignals } from '../../../features/courses/components/course-item-signals/course-item-signals';
-import { CourseItemPro } from '../../../features/courses/components/course-item-pro/course-item-pro';
 import { Header } from '../header/header';
 import { Footer } from '../footer/footer';
 import { LogoCoders } from '../logo-coders/logo-coders';
 import { Card } from '../../design/card/card';
 import { Menu } from '../menu/menu';
+import AboutPage from '../../../features/about/about-page';
+import CoursesPage from '../../../features/courses/courses-page';
+import DashboardPage from '../../../features/dashboard/dashboard-page';
+import HomePage from '../../../features/home/home-page';
 
 @Component({
   imports: [
@@ -17,9 +18,10 @@ import { Menu } from '../menu/menu';
     Menu,
     Footer,
     Card,
-    CourseItem,
-    CourseItemSignals,
-    CourseItemPro,
+    HomePage,
+    DashboardPage,
+    CoursesPage,
+    AboutPage,
   ],
   selector: 'ind-root',
   styles: `
@@ -48,17 +50,19 @@ import { Menu } from '../menu/menu';
       <ind-logo-coders slot="logo" />
       <ind-menu slot="menu" />
     </ind-header>
-
     <main class="container">
       <router-outlet />
-      <details>
-        <summary>Course Items</summary>
-        <ind-course-item />
-        <ind-course-item-signals />
-      </details>
-
-      <ind-card>
-        <ind-course-item-pro />
+      <ind-card id="home">
+        <ind-home-page />
+      </ind-card>
+      <ind-card id="dashboard">
+        <ind-dashboard-page />
+      </ind-card>
+      <ind-card id="courses">
+        <ind-courses-page />
+      </ind-card>
+      <ind-card id="about">
+        <ind-about-page />
       </ind-card>
     </main>
 
