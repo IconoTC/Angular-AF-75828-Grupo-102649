@@ -1,9 +1,12 @@
 import { Component, signal } from '@angular/core';
 import { User } from '../user/user';
 import { Separator } from '../separator/separator';
+import { Toggle } from '../toggle/toggle';
+import { Search } from '../search/search';
+import { SearchRef } from '../search-ref/search-ref';
 
 @Component({
-  imports: [User, Separator],
+  imports: [User, Separator, Toggle, Search, SearchRef],
   selector: 'ind-header',
   styles: `
     :host {
@@ -83,7 +86,9 @@ import { Separator } from '../separator/separator';
         <div class="user-icons">
           <ind-user />
         </div>
-        <div class="system-icons">System Icons (Toggle)</div>
+        <div class="system-icons">
+          <ind-toggle />
+        </div>
       </div>
       <div class="bottom-row">
         <p class="first-line">{{ subtitle() }}</p>
@@ -92,7 +97,10 @@ import { Separator } from '../separator/separator';
             <!-- Slot: Menu -->
             <ng-content select="[slot=menu]"/>
           </div>
-          <div>Search</div>
+          <div>
+            <ind-search />
+            <ind-search-ref />
+          </div>
         </div>
       </div>
     </header>
