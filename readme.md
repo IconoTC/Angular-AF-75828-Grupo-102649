@@ -27,7 +27,6 @@ Curso de Angular 22, versión publicada el 3 de Junio de 2026.
   - Creación de un nuevo proyecto (app) Angular. `ng generate app`
   - Estructura de un workspace/proyecto Angular.
   - Añadiendo ESLint (`ng add`) y Prettier.
-  - Estructura de un workspace/proyecto Angular.
 
 - Angular CLI: Comandos básicos.
   - Servidor de desarrollo: `ng serve`.
@@ -42,22 +41,18 @@ Curso de Angular 22, versión publicada el 3 de Junio de 2026.
   - Construcción del proyecto: `ng build`.
   - Despliegue: `ng deploy`. Opciones
 
-<!-- 
 - Generación de componentes: `ng generate`.
   - Elementos de un componente: HTML, CSS, TypeScript. 
   - Template y estilos inline o en ficheros.
   - Guía de estilos actualizada
   - Scaffolding
+  - Estilos globales: variables, reset...
 
+<!-- 
 - Elementos básicos de TypeScript.
   - Tipos de datos. Inferencia y anotación de tipos.
   - Tipado de funciones.
-  - Tipos personalizados. Interfaces y tipos. -->
-
-## Día 2 (M-29/09): Componentes y Rutas
-
-<!-- - Elementos básicos de TypeScript (continuación).
-
+  - Tipos personalizados. Interfaces y tipos. 
   - Clases ES6 en TypeScript.
     - Modificadores de acceso.
     - Getters y Setters.
@@ -66,6 +61,9 @@ Curso de Angular 22, versión publicada el 3 de Junio de 2026.
   - Módulos ES6 en TypeScript.
     - Import y Export.
     - Módulos por defecto y nombrados.
+-->
+
+- Definición de tipos/interfaces y datos: Course
 
  - Generación de componentes: `ng generate component <nombre>`.
     - Programación declarativa en el template: {{}}, [], ()
@@ -79,12 +77,29 @@ Curso de Angular 22, versión publicada el 3 de Junio de 2026.
   - Test de implementación v. test de comportamiento.
   - Tests para componentes básicos.
     - Renderizado del componente (e.g. heading).
-    - Interacción con el componente (e.g. click en un botón). -->
+    - Coverage. Instalación v-8:  `npm i -D @vitest/coverage-v8`
+
+- Componente 🧿CourseItemSignals
+  - Signals y asincronía. Zoneless + Estrategia OnPush 
+  
+- Componente 🧿CourseItemPro
+
+## Día 2 (M-29/09): Componentes y Rutas
+
+<!-- - Componente 🧿CourseItemPro
+  - Eventos
+  - Computed signals
+
+- Scaffolding. Core
+  - Componente 🧿Header. Estructura básica en CSS: Grid
+  - Componente 🧿Footer
+   - Test de Header y Footer
+  - Componente 🧿LogoCoders. Fichero svg como template -->
+
 
 - [Descanso]: 11:45 - 12:15
  
 <!-- - Scaffolding. Core
-  - Componentes Header y Footer.
   - Componente Menu. Proyección de contenido
   - Componentes Card. Aspecto visual básico.
   - App como contenedor principal.
