@@ -5,9 +5,22 @@ import { CourseItemSignals } from '../../../features/courses/components/course-i
 import { CourseItemPro } from '../../../features/courses/components/course-item-pro/course-item-pro';
 import { Header } from '../header/header';
 import { Footer } from '../footer/footer';
+import { LogoCoders } from '../logo-coders/logo-coders';
+import { Card } from '../../design/card/card';
+import { Menu } from '../menu/menu';
 
 @Component({
-  imports: [RouterOutlet, Header, Footer, CourseItem, CourseItemSignals, CourseItemPro],
+  imports: [
+    RouterOutlet,
+    Header,
+    LogoCoders,
+    Menu,
+    Footer,
+    Card,
+    CourseItem,
+    CourseItemSignals,
+    CourseItemPro,
+  ],
   selector: 'ind-root',
   styles: `
     :host {
@@ -31,7 +44,10 @@ import { Footer } from '../footer/footer';
     }
   `,
   template: `
-    <ind-header />
+    <ind-header>
+      <ind-logo-coders slot="logo" />
+      <ind-menu slot="menu" />
+    </ind-header>
 
     <main class="container">
       <router-outlet />
@@ -41,9 +57,11 @@ import { Footer } from '../footer/footer';
         <ind-course-item-signals />
       </details>
 
-      <ind-course-item-pro />
+      <ind-card>
+        <ind-course-item-pro />
+      </ind-card>
     </main>
-    
+
     <ind-footer />
   `,
 })
