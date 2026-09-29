@@ -1,6 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { COURSES } from '../../data/courses';
 import { Course } from '../../types/course';
+
+const STAT_LIMIT = 10;
 
 @Component({
   imports: [],
@@ -68,9 +70,25 @@ import { Course } from '../../types/course';
           >Utilidad: <output>{{ course().courseStats.utility }}</output></span
         >
         <div class="course-courseStats-buttons">
-          <button>➖</button>
-          <button>➕</button>
-          <button [title]="'Reset ' + 'utilidad' + ' a 0'">🔄️</button>
+          <button
+            (click)="changeStat('utility', -1)"
+            [disabled]="course().courseStats.utility <= 0"
+          >
+            ➖
+          </button>
+          <button
+            (click)="changeStat('utility', 1)"
+            [disabled]="course().courseStats.utility >= statLimit"
+          >
+            ➕
+          </button>
+          <button
+            (click)="changeStat('utility')"
+            [disabled]="course().courseStats.utility === 0"
+            [title]="'Reset ' + 'utilidad' + ' a 0'"
+          >
+            🔄️
+          </button>
         </div>
       </div>
       <div class="course-stats" aria-label="Dificultad">
@@ -78,9 +96,25 @@ import { Course } from '../../types/course';
           >Dificultad: <output>{{ course().courseStats.difficulty }}</output></span
         >
         <div class="course-courseStats-buttons">
-          <button>➖</button>
-          <button>➕</button>
-          <button [title]="'Reset ' + 'utilidad' + ' a 0'">🔄️</button>
+          <button
+            (click)="changeStat('difficulty', -1)"
+            [disabled]="course().courseStats.difficulty <= 0"
+          >
+            ➖
+          </button>
+          <button
+            (click)="changeStat('difficulty', 1)"
+            [disabled]="course().courseStats.difficulty >= statLimit"
+          >
+            ➕
+          </button>
+          <button
+            (click)="changeStat('difficulty')"
+            [disabled]="course().courseStats.difficulty === 0"
+            [title]="'Reset ' + 'dificultad' + ' a 0'"
+          >
+            🔄️
+          </button>
         </div>
       </div>
       <div class="course-stats" aria-label="Actualidad">
@@ -88,14 +122,69 @@ import { Course } from '../../types/course';
           >Actualidad: <output>{{ course().courseStats.actualization }}</output></span
         >
         <div class="course-courseStats-buttons">
-          <button>➖</button>
-          <button>➕</button>
-          <button [title]="'Reset ' + 'utilidad' + ' a 0'">🔄️</button>
+          <button
+            (click)="changeStat('actualization', -1)"
+            [disabled]="course().courseStats.actualization <= 0"
+          >
+            ➖
+          </button>
+          <button
+            (click)="changeStat('actualization', 1)"
+            [disabled]="course().courseStats.actualization >= statLimit"
+          >
+            ➕
+          </button>
+          <button
+            (click)="changeStat('actualization')"
+            [disabled]="course().courseStats.actualization === 0"
+            [title]="'Reset ' + 'actualidad' + ' a 0'"
+          >
+            🔄️
+          </button>
         </div>
+      </div>
+      <div class="course-stats" aria-label="Media">
+        <span
+          >Media: <output>{{ statsAverage().toFixed(2) }}</output></span
+        >
+        <div></div>
       </div>
     </div>
   `,
 })
 export class CourseItemPro {
   private readonly course = signal<Course>(COURSES[0]);
+
+  private readonly statsAverage = computed(() => {
+    //(this.course().courseStats.utility + this.course().courseStats.difficulty + this.course().courseStats.actualization) / 3
+
+    const stats = this.course().courseStats;
+    const total = Object.values(stats).reduce((acc, stat) => acc + stat, 0);
+    return total / Object.keys(stats).length;
+  });
+
+  private readonly statLimit = STAT_LIMIT;
+
+  protected changeStat(stat: keyof Course['courseStats'], delta = 0): void {
+    console.log('Change stat clicked');
+
+    if (delta === 0) {
+      this.course.update((current) => ({
+        ...current,
+        courseStats: {
+          ...current.courseStats,
+          [stat]: 0,
+        },
+      }));
+      return;
+    }
+
+    this.course.update((current) => ({
+      ...current,
+      courseStats: {
+        ...current.courseStats,
+        [stat]: current.courseStats[stat] + delta,
+      },
+    }));
+  }
 }
