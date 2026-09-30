@@ -5,10 +5,6 @@ import { Footer } from '../footer/footer';
 import { LogoCoders } from '../logo-coders/logo-coders';
 import { Card } from '../../design/card/card';
 import { Menu } from '../menu/menu';
-import AboutPage from '../../../features/about/about-page';
-import CoursesPage from '../../../features/courses/courses-page';
-import DashboardPage from '../../../features/dashboard/dashboard-page';
-import HomePage from '../../../features/home/home-page';
 import { MenuOption } from '../../types/menu-option';
 import { MENU_OPTIONS } from '../../../app.routes';
 
@@ -20,10 +16,6 @@ import { MENU_OPTIONS } from '../../../app.routes';
     Menu,
     Footer,
     Card,
-    HomePage,
-    DashboardPage,
-    CoursesPage,
-    AboutPage,
   ],
   selector: 'ind-root',
   styles: `
@@ -53,8 +45,11 @@ import { MENU_OPTIONS } from '../../../app.routes';
       <ind-menu slot="menu" [options]="menuItems()" />
     </ind-header>
     <main class="container">
-      <router-outlet />
-      <ind-card id="home">
+      <ind-card>
+        <router-outlet />
+      </ind-card>
+
+      <!-- <ind-card id="home">
         <ind-home-page />
       </ind-card>
       <ind-card id="dashboard">
@@ -65,14 +60,14 @@ import { MENU_OPTIONS } from '../../../app.routes';
       </ind-card>
       <ind-card id="about">
         <ind-about-page />
-      </ind-card>
+      </ind-card> -->
     </main>
 
     <ind-footer />
   `,
 })
 export class App {
-  private readonly title = signal('Demo-01');
+  private readonly title = signal('Demo-02');
   private readonly subtitle = signal('Curso de Angular 22');
 
   private readonly menuItems = signal<MenuOption[]>(MENU_OPTIONS);
