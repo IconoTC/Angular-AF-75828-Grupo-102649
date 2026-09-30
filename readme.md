@@ -156,7 +156,6 @@ Curso de Angular 22, versión publicada el 3 de Junio de 2026.
 
 ## Día 3 (X-30/09). Comunicaciones entre Componentes. Rutas, Servicios 
 
-<!--
 - Comunicación entre componentes (1)
   - Input. Decoradores @Input. función input(). Drilling
 
@@ -164,8 +163,10 @@ Curso de Angular 22, versión publicada el 3 de Junio de 2026.
   - Componente 🧿Counter. Estado y eventos (click)
   - Refactor Componente Counter. Condicionales @If. [class}
 
+<!--
 - Testing de todos los componentes (comentado)
   - Test de Counter. Eventos. Errores al testar implementación
+-->
 
 - Comunicación entre componentes (2) 
   - 🧿CounterList. Agrupando contadores. Estado en el componente padre
@@ -176,21 +177,21 @@ Curso de Angular 22, versión publicada el 3 de Junio de 2026.
     - Contadores. Eventos con valor 
   - Respuesta a los eventos. Estado en el componente padre (contenedor/controlador).
   - Computed signals 
-  - Test de inputs y outputs. 
--->
+  <!-- - Test de inputs y outputs.  -->
 
-<!-- 
 - Rutas básicas. `app.routes.ts`
   - Array de rutas.
   - Array de opciones de menu
   - RouterOutlet en AppComponent.
   - Navegación. Componente menu. @for
   - SPA: RouterLink y RouterLinkActive
-- Rutas Lazy. Default import en las páginas 
-- Test las paginas (componentes) con rutas. RouterTestingHarness
--->
 
 - [Descanso]: 11:45 - 12:15
+
+<!-- - Rutas (continuación)
+  - Rutas Lazy. Default import en las páginas 
+  - Test las paginas (componentes) con rutas. RouterTestingHarness -->
+
 
 <!-- - 🧿Info. Componente para probar servicios...
 - Introducción a los servicios en Angular.
