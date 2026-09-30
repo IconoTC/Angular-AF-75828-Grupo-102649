@@ -12,6 +12,8 @@ describe('Menu', () => {
 
     fixture = TestBed.createComponent(Menu);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('options', [])
+    fixture.detectChanges();
     await fixture.whenStable();
   });
 

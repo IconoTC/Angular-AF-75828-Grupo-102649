@@ -1,5 +1,4 @@
-import { Component, signal } from '@angular/core';
-import { MENU_OPTIONS } from '../../../app.routes';
+import { Component, input } from '@angular/core';
 import { MenuOption } from '../../types/menu-option';
 import { CommonModule } from '@angular/common';
 
@@ -31,7 +30,7 @@ import { CommonModule } from '@angular/common';
     }`,
   template: ` <nav>
     <ul>
-  @for (item of menuItems(); track item.label) {
+  @for (item of options(); track item.label) {
     <li>
       <a [href]="item.path">
         {{ item.label }}
@@ -44,5 +43,5 @@ import { CommonModule } from '@angular/common';
   </nav>`,
 })
 export class Menu {
-  private menuItems = signal<MenuOption[]>(MENU_OPTIONS);
+  readonly options = input.required<MenuOption[]>();
 }

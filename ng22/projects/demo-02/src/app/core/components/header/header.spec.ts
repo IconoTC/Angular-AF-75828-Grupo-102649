@@ -12,6 +12,9 @@ describe('Header', () => {
 
     fixture = TestBed.createComponent(Header);
     component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('app-title', 'Test-01');
+    fixture.componentRef.setInput('subtitle', 'Curso de Angular 22');
     await fixture.whenStable();
   });
 
@@ -22,14 +25,14 @@ describe('Header', () => {
    // Test de implementación
   // Test de caja blanca
   it('should have a title property', () => {
-    expect(component['title']()).toBe('Demo-01');
+    expect(component['title']()).toBe('Test-01');
   });
 
     // Test de comportamiento
   // Test de caja negra
   it('should render title', () => {
     const element = fixture.nativeElement as HTMLElement;
-    expect(element.querySelector('h1')?.textContent).toContain('Demo-01');
+    expect(element.querySelector('h1')?.textContent).toContain('Test-01');
   });
 
 });

@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
 import { User } from '../user/user';
 import { Separator } from '../separator/separator';
 import { Toggle } from '../toggle/toggle';
@@ -106,6 +106,8 @@ import { Search } from '../search/search';
   `,
 })
 export class Header {
-  private readonly title = signal('Demo-02');
-  private readonly subtitle = signal('Curso de Angular 22');
+  readonly title = input('Title', {
+    alias: 'app-title',
+  });
+  readonly subtitle = input.required<string>();
 }
