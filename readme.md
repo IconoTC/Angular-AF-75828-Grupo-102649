@@ -13,7 +13,7 @@
 
 Curso de Angular 22, versión publicada el 3 de Junio de 2026.
 
-## Día 1 (L-28/09): Introducción a Typescript y Angular
+## Día 1 (L-28/09): Introducción Angular. CLI. Componentes. Testing.
 
 - Introducción a Angular y su ecosistema.
 
@@ -84,36 +84,58 @@ Curso de Angular 22, versión publicada el 3 de Junio de 2026.
   
 - Componente 🧿CourseItemPro
 
-## Día 2 (M-29/09): Componentes y Rutas
+## Día 2 (M-29/09): Componentes del Layout. Páginas
 
-<!-- - Componente 🧿CourseItemPro
+- Componente 🧿CourseItemPro
   - Eventos
   - Computed signals
 
 - Scaffolding. Core
-  - Componente 🧿Header. Estructura básica en CSS: Grid
-  - Componente 🧿Footer
-   - Test de Header y Footer
-  - Componente 🧿LogoCoders. Fichero svg como template -->
 
+- Componente 🧿Header. Estructura básica en CSS: Grid
+- Componente 🧿Footer
+ <!-- - Test de Header y Footer -->
+- Componente 🧿LogoCoders. Fichero svg como template
+- Componente 🧿User. Svg como parte del template
+  <!-- - Test de LogoCoders. Spies & mocks -->
+  
+- Componente 🧿Card. Proyección de contenido
+  - Uso en el componente 🧿App como contenedor principal.
+  <!-- - Test de Card. TestingComponent -->
+
+- Componentes de navegación  
+  - 🧿Menu. Tipo y datos. Iteración con @for
+  - Incorporación en App
+  - 🧿Socials. @for + @switch: iconos svg de las redes sociales
+  <!-- - Test de Menu y Socials. Renderizado y @for @switch -->
+
+- Componentes CSS
+  - 🧿Separador. Componente de CSS
 
 - [Descanso]: 11:45 - 12:15
- 
-<!-- - Scaffolding. Core
-  - Componente Menu. Proyección de contenido
-  - Componentes Card. Aspecto visual básico.
-  - App como contenedor principal.
 
+- Componentes CSS
+  - 🧿toggle: Widget css como componente Angular
+
+
+- Componente 🧿Search. Input de usuario: 2 way data binding. [(ngModel)]
+- Referencias locales. #ref
+  - Signal queries: viewChild, focus()
+  - Ciclo de vida de los componentes 
+  - Effects (primitiva de signal) 
+
+- Componente 🧿SearchRef. Referencias locales en el template.  
+<!-- 
+- Test de Search. Renderizado y data binding
+-->
+
+- Test del eventos: componente CourseItemPro. Renderizado y eventos.
+
+
+- Nuevo proyecto (app): demo-02.  `ng g app demo-02 --style css --ssr false -p ind -t -s` 
 
 - Scaffolding. Features
-  - Componentes (pages): Home, About.
-
-- Componentes.
-  - Componente Counter. Eventos. (click)
-    - Condicionales @If. [class]
-  - Componente Search. Input de usuario: data binding. [(ngModel)]
-- Referencias locales. #ref
-  - Componente SearchRef. Referencias locales en el template.  -->
+  - Componentes (pages): Home, About, Dashboard, Courses.
 
 <!--
 - Testing de todos los componentes
@@ -132,76 +154,146 @@ Curso de Angular 22, versión publicada el 3 de Junio de 2026.
   - Zoneless y asincronía: uso de Signals
 -->
 
-## Día 3 (X-30/09). Comunicaciones y Arquitectura de componentes. Formularios TD
+## Día 3 (X-30/09). Comunicaciones entre Componentes. Rutas, Servicios 
 
-<!-- - Review doble data binding & #ref
-  - Signal queries: viewChild
-  - Ciclo de vida de los componentes
-  - Effects (primitiva de signal)
-- Modificamos Menu. @for
+<!--
+- Comunicación entre componentes (1)
+  - Input. Decoradores @Input. función input(). Drilling
 
+- Dashboard.
+  - Componente 🧿Counter. Estado y eventos (click)
+  - Refactor Componente Counter. Condicionales @If. [class}
+
+- Testing de todos los componentes (comentado)
+  - Test de Counter. Eventos. Errores al testar implementación
+
+- Comunicación entre componentes (2) 
+  - 🧿CounterList. Agrupando contadores. Estado en el componente padre
+  - Input en los contadores. Revision de los totales
+    - input() y linkedSignal
+    - sincronización de diversas "fuentes" de cambio
+  - Output. Decorador @Output. EventEmitter. Función output(). Eventos del contador
+    - Contadores. Eventos con valor 
+  - Respuesta a los eventos. Estado en el componente padre (contenedor/controlador).
+  - Computed signals 
+  - Test de inputs y outputs. 
+-->
+
+<!-- 
 - Rutas básicas. `app.routes.ts`
   - Array de rutas.
   - Array de opciones de menu
   - RouterOutlet en AppComponent.
   - Navegación. Componente menu. @for
   - SPA: RouterLink y RouterLinkActive
-- Rutas Lazy. Default import en las páginas -->
+- Rutas Lazy. Default import en las páginas 
+- Test las paginas (componentes) con rutas. RouterTestingHarness
+-->
 
 - [Descanso]: 11:45 - 12:15
 
-
-<!-- - Comunicación entre componentes
-
-  - Input. Decoradores @Input. función input(). Drilling
-  - Output. Decorador @Output. EventEmitter. Función output(). Eventos del contador
-  - Agrupando contadores. Estado en el componente padre
-  - Contadores. Eventos con valor. Computed signals 
-  
-- Pipes. Location "es"
-
-- Arquitectura de componentes
-  - Componentes de contenedores vs de presentación.
-  - Componentes inteligentes vs tontos.
-
-- Ejemplo: Tasks List
-  - Entidad Tasks. Modelo y mock de datos asíncrono.
-  - Componente Tasks-List. Lógica del estado
-  - Componente Tasks-Item. Input y Output (Eventos)
-  - Componente Tasks-Form. Output (Eventos) - Mock sin formulario -->
-
-## Día 4 (J-01/10). Servicios. Providers e injectors. Formularios DD
-
-<!-- - Componente Tasks-Form. Output (Eventos)
-  - Forms Template Driven (TD)
-    - NgForm implícito, NgModel. Referencias locales
-    - viewChild(NgForm) y form.reset()
-    - viewChild(Form), ElementRef.nativeElement y acceso al DOM
-  - Signal Forms
-
+<!-- - 🧿Info. Componente para probar servicios...
 - Introducción a los servicios en Angular.
+
 - Servicios y Providers. DI (Dependency Injection)
   - Provider root v. provider en un componente / ruta
-  - Ejemplo con un servicio simple: Time
-  - Injector jerárquico. Servicios singleton y no singleton.
+  - Ejemplo con un servicio simple: TimeService
+  - Injector jerárquico. Servicios singleton y no singleton.  
 
-- Solución de problemas en CSS con el grid RWD -->
+  - Test del servicio TimeService
+  - Test de componentes con servicios (mocks y spies).
+    - Modificación del provider en el TestBed. `providers: [ { provide: TimeService, useValue: mockTimeService } ]`
+    - Modificación del provider en el componente. `TestBed.overrideProvider()`
+
+- Servicio Logger. 
+  - environments de Angular
+  - Uso de tokens de inyección  -->
+
+## Día 4 (J-01/10). Pipes y directivas. Formularios TD, DD, SD
+
+<!-- 
+
+- Pipes. Location "es"
+   - Usar por defecto: inyección de dependencias
+  
+- Directivas. Estructurales y de atributo  
+ 
+ - Rutas anidadas. 
+    - Login y Register
+    - Fichero de rutas propio de Auth. `auth.routes.ts`
+  - Rutas con parámetros
+    - LoginPage. Parámetros y formularios posibles
+      (td, md-rx, signals)
+    - @if / @switch
+-->
+
+
+<!--
+- 🧿Componente LoginFormTd: Forms Template Driven (TD)
+    - NgForm implícito, NgModel. Referencias locales
+    - Paso de ngForm al onSubmit: form.value; form.reset()
+    - Validaciones 
+ -->
 
 - [Descanso] - 11:45 - 12:15
 
-<!-- - Servicios y patrón Repository
+<!-- - Formularios reactivos (DD). RegisterForm
+  - FormGroup, FormControl, FormBuilder
+  - Binding desde el template  
+  - RegisterForm. Otros controles HTML
+  - Validaciones síncronas (y asíncronas).
+    - Mensajes de validación -->
+
+<!-- - Testing de formularios reactivos. -->
+
+<!-- - 🧿Componente LoginFormSignals: Formularios con Signals.
+  - Model (signal), FieldTree, FieldState 
+  - Binding desde el template  [formField] y (submit)
+  - Schema de validación
+  - Directiva FormRoot y submit -->
+
+<!--
+- RegisterForm. Otros controles HTML (comentado)
+-->
+
+<!-- - Custom controls
+  -  🧿Componente Input. [FormValueControl]  -->
+
+## Día 5 (V-02/10). Arquitectura. Servicios repo (HTTP) y state 
+
+<!-- - Arquitectura de componentes
+  - Componentes de contenedores vs de presentación.
+  - Componentes inteligentes vs tontos.
+
+- Ejemplo: Courses List
+  - Entidad Courses. Modelo y mock de datos asíncrono.
+  - Componente Courses-List. Lógica del estado
+  - Componente Courses-Item. Input y Output (Eventos)
+  - Componente Courses-Form. Output (Eventos)  -->
+
+ <!-- 
+- Servicios y patrón Repository
   - Mock de datos. Interface de los repositorios
   - Uso de promesas y observables (RxJS) en los servicios.
-  - Servicio LocalNotesRepository: Repositorio y persistencia local (localStorage).
-  - Uso en los componentes. Inyección de dependencias.
-  - Repositorio y lógica de negocio (estado). Estrategias 
-  - Métodos CRUD. getAll() y getById()
-  - Métodos CRUD. add(), update(), delete()
 
 - RxJS (Observables)
   - Introducción. Observables, subscription, operadores.
   - Los mismos repositorios usando RxJS (Observables). 
-  - Uso del repo en el componente -->
+  - Uso del repo en el componente   
+
+- API server fake basado en JSONServer.
+  - Prueba con Postman
+
+- Uso de environments. 
+-->
+
+- [Descanso] 11:45 - 12:15
+
+<!-- 
+  - Servicio LocalNotesRepository: Repositorio y persistencia local (localStorage).
+  - Uso en los componentes. Inyección de dependencias.
+
+-->
 
 
   <!-- - Testing de servicios.
@@ -210,27 +302,13 @@ Curso de Angular 22, versión publicada el 3 de Junio de 2026.
       - Test de promesas (async, whenStable, expectAsync).
     - Testing de componentes con servicios (mocks y spies). -->
 
-<!-- - Formularios reactivos (DD). RegisterForm
-  - FormGroup, FormControl, FormBuilder
-  - Binding desde el template  -->
-
-## Día 5 (V-02/10). Servicios HTTP
-
-<!-- - Formularios reactivos (continuación).
-
-  - RegisterForm. Otros controles HTML
-  - Validaciones síncronas (y asíncronas).
-    - Mensajes de validación  -->
-  
-<!-- - Testing de formularios reactivos. -->
 
 <!-- - Introducción a los servicios HTTP en Angular.
 
-- API server fake basado en JSONServer.
-  - Prueba con Postman
+  - Repositorio y lógica de negocio (estado). Estrategias 
+  - Métodos CRUD. getAll() y getById()
+  - Métodos CRUD. add(), update(), delete()
 
-- Instalación y uso de environments. 
-  - Configuración de la URL base del API.
 
 - Servicio HttpClientModule. Observables (RxJs).
 
@@ -244,12 +322,9 @@ Curso de Angular 22, versión publicada el 3 de Junio de 2026.
   - Test de componentes con servicios HTTP (mocks y spies).
 -->
 
-- [Descanso] 11:45 - 12:15
-
 <!-- 
 - Servicios stateful: patrón Flux
 
-- Nuevo proyecto (demo-02). Feature Notes
 
   - Estado con RxJS: Subjects
     - Estado privado con BehaviorSubject
@@ -268,9 +343,4 @@ Curso de Angular 22, versión publicada el 3 de Junio de 2026.
 - Gestión de errores
 - Uso desde cualquier parte de la aplicación (Header) 
 
-- Más novedades (Signals)
-  - resources: httResource (Angular 22)
-  - linkedSignals
-- Directivas propias
-- Interceptors y Guards
-- Testing -->
+-->
