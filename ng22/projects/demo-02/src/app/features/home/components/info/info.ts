@@ -1,15 +1,17 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Timestamp } from '../../../../core/components/timestamp/timestamp';
 import { TimeService } from '../../../../core/services/time';
+import { Logger } from '../../../../core/services/logger';
+import { DatePipe, TitleCasePipe } from '@angular/common';
 
 @Component({
-  imports: [Timestamp],
+  imports: [Timestamp, DatePipe, TitleCasePipe],
   providers: [
     // {
     //   provide: TimeService,
     //   useClass: TimeService
     // }
-    TimeService
+    TimeService,
   ],
   selector: 'ind-info',
   styles: `
@@ -34,8 +36,6 @@ import { TimeService } from '../../../../core/services/time';
       justify-content: center;
       align-items: center;
     }
-
-   
   `,
   template: `
     <h3>Información del proyecto</h3>
@@ -48,16 +48,24 @@ import { TimeService } from '../../../../core/services/time';
     <footer>
       <ul>
         <li>Autor: {{ author() }}</li>
-        <li>Fecha: {{ currentDate() }}</li>
+        <li>Fecha: {{ currentDate() | date  : 'fullDate' | titlecase }}</li>
       </ul>
     </footer>
     <ind-timestamp />
   `,
 })
 export class Info {
+  readonly #logger = inject(Logger);
 
   protected readonly author = signal('Alejandro Cerezo');
-  protected readonly currentDate = signal(new Date().toLocaleDateString());
+  protected readonly currentDate = signal(new Date());
 
+  // Formato anterior de inyección de dependencias
   // constructor(protected readonly timeService: TimeService) {}
+
+
+  constructor(
+  ) {
+    this.#logger.warn('Level ', this.#logger.level)
+  }
 }
