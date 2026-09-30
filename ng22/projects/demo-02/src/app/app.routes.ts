@@ -1,9 +1,5 @@
 import { Routes } from '@angular/router';
 import { MenuOption } from './core/types/menu-option';
-import HomePage from './features/home/home-page';
-import DashboardPage from './features/dashboard/dashboard-page';
-import CoursesPage from './features/courses/courses-page';
-import AboutPage from './features/about/about-page';
 
 export const routes: Routes = [
   {
@@ -13,34 +9,49 @@ export const routes: Routes = [
   },
   {
     path: 'home',
-    component: HomePage,
+    // component: HomePage,
+    loadComponent: () => import('./features/home/home-page'),
     title: 'Inicio | Demo 02',
+    data: {
+      label: 'Inicio',
+    },
   },
   {
     path: 'dashboard',
-    component: DashboardPage,
+    //component: DashboardPage,
+    loadComponent: () => import('./features/dashboard/dashboard-page'),
     title: 'Dashboard | Demo 02',
+    data: {
+      label: 'Dashboard',
+    },
   },
   {
     path: 'courses',
-    component: CoursesPage,
+    //component: CoursesPage,
+    loadComponent: () => import('./features/courses/courses-page'),
     title: 'Cursos | Demo 02',
+    data: {
+      label: 'Cursos',
+    },
   },
   {
     path: 'about',
-    component: AboutPage,
+    //component: AboutPage,
+    loadComponent: () => import('./features/about/about-page'),
     title: 'Acerca de | Demo 02',
+    data: {
+      label: 'Acerca de',
+    },
   },
   {
     path: '**',
     redirectTo: 'home',
-  }
+  },
 ];
 
-
-export const MENU_OPTIONS: MenuOption[] = [
-  { label: 'Inicio', path: 'home'},
-  { label: 'Dashboard', path: 'dashboard'},
-  { label: 'Cursos', path: 'courses'},
-  { label: 'Acerca de', path: 'about'},
-];
+export const MENU_OPTIONS: MenuOption[] = routes
+  .filter((route) => route.data && route.data['label'])
+  .map((route) => ({
+    label: route.data!['label'] as string,
+    path: route.path as string,
+  }));
