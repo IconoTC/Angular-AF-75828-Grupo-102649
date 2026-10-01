@@ -3,8 +3,8 @@ import { LoginRequest, LoginResponse } from '../types/auth';
 import { delay, firstValueFrom, Observable, of } from 'rxjs';
 
 interface AuthOptions {
-  success: boolean;
-  delayTime: number;
+  success?: boolean;
+  delayTime?: number;
 }
 
 const DEFAULT_AUTH_OPTIONS: AuthOptions = {
@@ -40,7 +40,7 @@ export class Auth {
         error: 'Invalid credentials',
         token: '',
       } as LoginResponse).pipe(
-        delay(opts.delayTime)
+        delay(opts.delayTime as number)
       );
     }
 
@@ -55,7 +55,7 @@ export class Auth {
         rememberMe: data.rememberMe,
       },
     } as LoginResponse).pipe(
-      delay(opts.delayTime)
+      delay(opts.delayTime as number)
     );
   }
 

@@ -6,11 +6,12 @@ import { LoginFormMdRx } from '../components/login-form-md-rx/login-form-md-rx';
 import { LoginFormSignals } from '../components/login-form-signals/login-form-signals';
 import { MenuOption } from '../../../core/types/menu-option';
 import { Menu } from '../../../core/components/menu/menu';
+import { LoginInfo } from '../components/login-info/login-info';
 
-type FormType = 'td' | 'md-rx' | 'signals';
+type FormType = 'td' | 'md-rx' | 'signals' | 'info';
 
 @Component({
-  imports: [Card, LoginFormTd, LoginFormMdRx, LoginFormSignals, RouterLink, Menu],
+  imports: [Card, LoginFormTd, LoginFormMdRx, LoginFormSignals, LoginInfo, RouterLink, Menu],
   selector: 'ind-login-page',
   styles: ``,
   template: `
@@ -22,6 +23,8 @@ type FormType = 'td' | 'md-rx' | 'signals';
         <ind-login-form-md-rx />
       } @else if (formType() === 'signals') {
         <ind-login-form-signals />
+      } @else if (formType() === 'info') {
+        <ind-login-info />
       } @else {
         <p>Loading...</p>
       }
@@ -43,6 +46,6 @@ export default class LoginPage {
     {
       label: 'Formulario Signals',
       path: '../signals',
-    },
+    }
   ]);
 }

@@ -1,8 +1,13 @@
-import { Component } from "@angular/core";
-
+import { JsonPipe } from '@angular/common';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
+import { LoginRequest } from '../../types/auth';
+import { Auth } from '../../services/auth';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
 
 @Component({
-  imports: [],
+  imports: [FormsModule, JsonPipe],
   selector: 'ind-login-form-td',
   styles: `
     form {
@@ -62,7 +67,102 @@ import { Component } from "@angular/core";
   `,
   template: `
     <p>login-form-td works!</p>
-    
+    <form #form #ngForm="ngForm" (ngSubmit)="login(ngForm)">
+      <label for="email" class="form-control">
+        <span>Email:</span>
+        <input type="email" id="email" name="email" ngModel required email />
+      </label>
+      @if (ngForm.controls['email']?.invalid && ngForm.controls['email']?.touched) {
+        <div class="error">
+          @if (ngForm.controls['email']?.hasError('required')) {
+            <p>El correo electrónico es obligatorio.</p>
+          }
+          @if (ngForm.controls['email']?.hasError('email')) {
+            <p>Por favor, introduce una dirección de correo electrónico válida.</p>
+          }
+        </div>
+      }
+
+      <label for="password" class="form-control">
+        <span>Password:</span>
+        <input type="password" id="password" name="password" ngModel required minlength="5" />
+      </label>
+
+      @if (ngForm.controls['password']?.invalid && ngForm.controls['password']?.touched) {
+        <div class="error">
+          @if (ngForm.controls['password']?.hasError('required')) {
+            <p>La contraseña es obligatoria.</p>
+          }
+          @if (ngForm.controls['password']?.hasError('minlength')) {
+            <p>La contraseña debe tener al menos 5 caracteres.</p>
+          }
+        </div>
+      }
+
+      <label for="remember" class="form-control checkbox">
+        <input type="checkbox" id="remember" name="rememberMe" [ngModel]="false" />
+        <span>Remember me</span>
+      </label>
+
+      <button type="submit" [disabled]="ngForm.invalid || isSending()">Login</button>
+    </form>
+
+    <pre>{{ ngForm.value | json }}</pre>
   `,
 })
-export class LoginFormTd {}
+export class LoginFormTd {
+
+  readonly #auth = inject(Auth);
+  readonly #destroyRef = inject(DestroyRef);
+  readonly #router = inject(Router);
+
+  private readonly isSending = signal(false);
+
+  readonly #initialFormValue: LoginRequest = {
+    email: '',
+    password: '',
+    rememberMe: false,
+  };
+
+  // readonly form = viewChild<ElementRef<HTMLFormElement>>('form');
+  // readonly ngForm = viewChild<NgForm>('ngForm');
+  // constructor() {
+  //   effect(() => {
+  //     console.log('Form value:', this.ngForm());
+  //     console.log('Form', this.form());
+  //   });
+  // }
+
+  login(ngForm: NgForm) {
+    this.isSending.set(true);
+    if (ngForm.valid) {
+
+      console.log('Form submitted:', ngForm.value);
+
+      this.#auth.login(ngForm.value, {delayTime: 3000})
+      .pipe(
+        takeUntilDestroyed(this.#destroyRef)
+      )
+      .subscribe({
+        next: (response) => {
+          this.isSending.set(false);
+          ngForm.resetForm(this.#initialFormValue);
+          console.log('Login successful:', response);
+          this.#router.navigate(['auth','login','info'], {
+            state: response
+          });
+          // Aquí puedes manejar la respuesta exitosa, como redirigir al usuario o almacenar el token.
+        },
+        error: (error) => {
+          this.isSending.set(false);
+          console.error('Login failed:', error);
+          // Aquí puedes manejar el error, como mostrar un mensaje al usuario.
+        }
+      });
+
+
+    } else {
+      console.log('Form is invalid');
+    }
+  }
+}
