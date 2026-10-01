@@ -1,15 +1,16 @@
 import { Component, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [],
+  imports: [RouterLink],
   selector: 'ind-user',
   styles: ``,
   template: `
     <nav>
-      <a href="#user" (click)="handleNav()">
-        <svg 
-        [attr.width]="size()" 
-        [attr.height]="size()" 
+      <a [routerLink]="['auth', 'login']" (click)="handleNav()">
+        <svg
+        [attr.width]="size()"
+        [attr.height]="size()"
         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
         <title>{{ title() }}</title>
           <!--!Font Awesome Free v7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
@@ -24,7 +25,7 @@ import { Component, signal } from '@angular/core';
 })
 export class User {
 
-  private readonly title = signal('Go to User Page');
+  private readonly title = signal('Go to Login Page');
   private readonly size = signal('3rem')
 
   protected handleNav(): void {
