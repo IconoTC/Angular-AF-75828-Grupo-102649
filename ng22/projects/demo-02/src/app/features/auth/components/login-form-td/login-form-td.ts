@@ -66,7 +66,7 @@ import { Router } from '@angular/router';
     }
   `,
   template: `
-    <p>login-form-td works!</p>
+    <h3>login-form-td</h3>
     <form #form #ngForm="ngForm" (ngSubmit)="login(ngForm)">
       <label for="email" class="form-control">
         <span>Email:</span>
@@ -134,12 +134,12 @@ export class LoginFormTd {
   // }
 
   login(ngForm: NgForm) {
-    this.isSending.set(true);
     if (ngForm.valid) {
+      this.isSending.set(true);
 
       console.log('Form submitted:', ngForm.value);
 
-      this.#auth.login(ngForm.value, {delayTime: 3000})
+      this.#auth.login(ngForm.value, {delayTime: 1000})
       .pipe(
         takeUntilDestroyed(this.#destroyRef)
       )
