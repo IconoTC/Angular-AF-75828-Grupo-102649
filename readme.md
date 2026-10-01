@@ -230,7 +230,7 @@ Curso de Angular 22, versión publicada el 3 de Junio de 2026.
   - Servicio Auth. Login simulado con Observables y con Promesas.
   - Test del servicio Auth. Casos de uso
 
-<!-- 
+
  - Rutas anidadas. 
     - Login y Register
     - Fichero de rutas propio de Auth. `auth.routes.ts`
@@ -238,41 +238,46 @@ Curso de Angular 22, versión publicada el 3 de Junio de 2026.
     - LoginPage. Parámetros y formularios posibles
       (td, md-rx, signals)
     - @if / @switch
--->
 
-
-<!--
 - 🧿Componente LoginFormTd: Forms Template Driven (TD)
     - NgForm implícito, NgModel. Referencias locales
     - Paso de ngForm al onSubmit: form.value; form.reset()
     - Validaciones 
- -->
+    - Uso del servicio Auth desde el componente LoginFormTd
+
 
 - [Descanso] - 11:45 - 12:15
 
-<!-- - Formularios reactivos (DD). RegisterForm
+- 🧿Componente LoginFormTd: Forms Template Driven (TD)
+  - sending state
+  - Navegación y componente con feedback del login
+
+ - Formularios reactivos (DD). RegisterForm
   - FormGroup, FormControl, FormBuilder
   - Binding desde el template  
-  - RegisterForm. Otros controles HTML
   - Validaciones síncronas (y asíncronas).
-    - Mensajes de validación -->
+    - Mensajes de validación 
 
 <!-- - Testing de formularios reactivos. -->
 
-<!-- - 🧿Componente LoginFormSignals: Formularios con Signals.
+- 🧿Componente LoginFormSignals: Formularios con Signals.
+
   - Model (signal), FieldTree, FieldState 
   - Binding desde el template  [formField] y (submit)
   - Schema de validación
-  - Directiva FormRoot y submit -->
+  - Directiva FormRoot y submit 
 
 <!--
 - RegisterForm. Otros controles HTML (comentado)
 -->
 
-<!-- - Custom controls
-  -  🧿Componente Input. [FormValueControl]  -->
+- Custom controls
+  -  🧿Componente Input. [FormValueControl]
 
 ## Día 5 (V-02/10). Arquitectura. Servicios repo (HTTP) y state 
+
+- Feature Auth.
+  - Rutas con estado. 🧿LoginPage y componente 🧿LoginInfo 
 
 <!-- - Arquitectura de componentes
   - Componentes de contenedores vs de presentación.
