@@ -220,12 +220,17 @@ Curso de Angular 22, versión publicada el 3 de Junio de 2026.
   - RxJS (Observables)
     - Introducción. Observables, subscription, operadores.
 
+- Feature Auth
+  - Interface. Modelo de datos 
+
 ## Día 4 (J-01/10). Pipes y directivas. Formularios TD, DD, SD
 
+- Feature Auth
+  
+  - Servicio Auth. Login simulado con Observables y con Promesas.
+  - Test del servicio Auth. Casos de uso
+
 <!-- 
-
-
- 
  - Rutas anidadas. 
     - Login y Register
     - Fichero de rutas propio de Auth. `auth.routes.ts`
