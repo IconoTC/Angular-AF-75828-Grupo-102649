@@ -188,12 +188,13 @@ Curso de Angular 22, versión publicada el 3 de Junio de 2026.
 
 - [Descanso]: 11:45 - 12:15
 
-<!-- - Rutas (continuación)
+- Rutas (continuación)
   - Rutas Lazy. Default import en las páginas 
+<!-- 
   - Test las paginas (componentes) con rutas. RouterTestingHarness -->
 
 
-<!-- - 🧿Info. Componente para probar servicios...
+- 🧿Info. Componente para probar servicios...
 - Introducción a los servicios en Angular.
 
 - Servicios y Providers. DI (Dependency Injection)
@@ -201,23 +202,29 @@ Curso de Angular 22, versión publicada el 3 de Junio de 2026.
   - Ejemplo con un servicio simple: TimeService
   - Injector jerárquico. Servicios singleton y no singleton.  
 
-  - Test del servicio TimeService
+  <!-- - Test del servicio TimeService
   - Test de componentes con servicios (mocks y spies).
     - Modificación del provider en el TestBed. `providers: [ { provide: TimeService, useValue: mockTimeService } ]`
-    - Modificación del provider en el componente. `TestBed.overrideProvider()`
+    - Modificación del provider en el componente. `TestBed.overrideProvider()` -->
 
 - Servicio Logger. 
   - environments de Angular
-  - Uso de tokens de inyección  -->
-
-## Día 4 (J-01/10). Pipes y directivas. Formularios TD, DD, SD
-
-<!-- 
+  - Uso de tokens de inyección
 
 - Pipes. Location "es"
    - Usar por defecto: inyección de dependencias
   
 - Directivas. Estructurales y de atributo  
+
+- Servicios y asincronías
+  - RxJS (Observables)
+    - Introducción. Observables, subscription, operadores.
+
+## Día 4 (J-01/10). Pipes y directivas. Formularios TD, DD, SD
+
+<!-- 
+
+
  
  - Rutas anidadas. 
     - Login y Register
