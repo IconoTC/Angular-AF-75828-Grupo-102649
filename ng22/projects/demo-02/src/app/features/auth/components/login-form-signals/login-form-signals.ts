@@ -13,6 +13,7 @@ import {
 import { JsonPipe } from '@angular/common';
 import { Auth } from '../../services/auth';
 import { Router } from '@angular/router';
+import { Input } from '../../../../core/design/input/input';
 
 type LoginModel = LoginRequest;
 
@@ -23,7 +24,7 @@ type LoginModel = LoginRequest;
 // }
 
 @Component({
-  imports: [FormField, JsonPipe, FormRoot],
+  imports: [FormField, JsonPipe, FormRoot, Input],
   selector: 'ind-login-form-signals',
   styles: `
     form {
@@ -84,21 +85,32 @@ type LoginModel = LoginRequest;
   template: `
     <h3>login-form-signals</h3>
     <form [formRoot]="fieldTree">
-      <label for="email" class="form-control">
+      <!-- <label for="email" class="form-control">
         <span>Email:</span>
         <input type="email" id="email" [formField]="fieldTree.email" />
       </label>
       @if (fieldTree.email()?.invalid() && fieldTree.email()?.touched()) {
         <p class="error">{{ fieldTree.email().errors()[0].message }}</p>
-      }
+      } -->
 
-      <label for="password" class="form-control">
+
+      <ind-input
+        [type]="'email'"
+        [label]="'Email'"
+        [formField]="fieldTree.email" />
+
+      <!-- <label for="password" class="form-control">
         <span>Password:</span>
         <input type="password" id="password" [formField]="fieldTree.password" />
       </label>
       @if (fieldTree.password()?.invalid() && fieldTree.password()?.touched()) {
         <p class="error">{{ fieldTree.password().errors()[0].message }}</p>
-      }
+      } -->
+
+      <ind-input
+        [type]="'password'"
+        [label]="'Password'"
+        [formField]="fieldTree.password" />
 
       <label for="remember" class="form-control checkbox">
         <input type="checkbox" id="remember" [formField]="fieldTree.rememberMe" />

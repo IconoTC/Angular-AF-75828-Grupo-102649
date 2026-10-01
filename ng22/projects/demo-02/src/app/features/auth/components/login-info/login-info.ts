@@ -1,29 +1,20 @@
-import { Component, DestroyRef, inject, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Router, RoutesRecognized } from '@angular/router';
+import { Component, input } from '@angular/core';
 import { LoginResponse } from '../../types/auth';
+import { JsonPipe } from '@angular/common';
 
 @Component({
-  imports: [],
+  imports: [JsonPipe],
   selector: 'ind-login-info',
   styles: ``,
-  template: ` <p>Login completed successfully.</p> `,
+  template: `
+    @if (routerState()?.error) {
+      <p>Error: {{ routerState()?.error }}</p>
+    } @else {
+      <p>Saludo: {{ routerState()?.info?.email }}</p>
+    }
+    <pre>{{ routerState() | json }}</pre>
+  `,
 })
 export class LoginInfo {
-  readonly routerState = signal<LoginResponse | null>(null);
-  readonly #router = inject(Router);
-  readonly destroyRef = inject(DestroyRef);
-
-  constructor() {
-    this.#router.events.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((event) => {
-      if (event instanceof RoutesRecognized) {
-        console.log('RoutesRecognized event:', event);
-        const navigation = this.#router.getCurrentNavigation();
-        if (navigation && navigation.extras.state) {
-          this.routerState.set(navigation.extras.state as LoginResponse);
-          console.log('Navigation state:', this.routerState());
-        }
-      }
-    });
-  }
+  readonly routerState = input.required<LoginResponse | null>();
 }

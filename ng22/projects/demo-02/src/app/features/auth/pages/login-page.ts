@@ -1,4 +1,4 @@
-import { Component, input, signal } from '@angular/core';
+import { Component, DestroyRef, inject, input, signal } from '@angular/core';
 import { LoginFormTd } from '../components/login-form-td/login-form-td';
 import { RouterLink } from '@angular/router';
 import { Card } from '../../../core/design/card/card';
@@ -7,6 +7,10 @@ import { LoginFormSignals } from '../components/login-form-signals/login-form-si
 import { MenuOption } from '../../../core/types/menu-option';
 import { Menu } from '../../../core/components/menu/menu';
 import { LoginInfo } from '../components/login-info/login-info';
+
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Router, RoutesRecognized } from '@angular/router';
+import { LoginResponse } from '../types/auth';
 
 type FormType = 'td' | 'md-rx' | 'signals' | 'info';
 
@@ -24,7 +28,7 @@ type FormType = 'td' | 'md-rx' | 'signals' | 'info';
       } @else if (formType() === 'signals') {
         <ind-login-form-signals />
       } @else if (formType() === 'info') {
-        <ind-login-info />
+        <ind-login-info [routerState]="routerState()" />
       } @else {
         <p>Loading...</p>
       }
@@ -46,6 +50,29 @@ export default class LoginPage {
     {
       label: 'Formulario Signals',
       path: '../signals',
-    }
+    },
   ]);
+
+  readonly routerState = signal<LoginResponse | null>(null);
+  readonly #router = inject(Router);
+  readonly destroyRef = inject(DestroyRef);
+
+  constructor() {
+    this.#router.events.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((event) => {
+      if (event instanceof RoutesRecognized) {
+        console.log('RoutesRecognized event:', event);
+        const navigation = this.#router.currentNavigation;
+
+        if (!navigation()) {
+          return;
+        }
+
+        const state = navigation()!.extras.state as LoginResponse | undefined;
+        if (state) {
+          this.routerState.set(state);
+          console.log('Navigation state:', this.routerState());
+        }
+      }
+    });
+  }
 }
