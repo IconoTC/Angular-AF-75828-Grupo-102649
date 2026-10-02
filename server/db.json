@@ -1,0 +1,47 @@
+{
+  "courses": [
+    {
+      "id": "1",
+      "title": "Angular Basics",
+      "description": "Learn the basics of Angular",
+      "duration": "2 hours",
+      "level": "beginner",
+      "image": "assets/course_angular.webp",
+      "isOfficial": true,
+      "courseStats": {
+        "difficulty": 7,
+        "actualization": 9,
+        "utility": 8
+      }
+    },
+    {
+      "id": "2",
+      "title": "Advanced Angular",
+      "description": "Dive deep into Angular",
+      "duration": "4 hours",
+      "level": "advanced",
+      "isOfficial": false,
+      "image": "assets/advanced_angular.webp",
+      "courseStats": {
+        "difficulty": 3,
+        "actualization": 3,
+        "utility": 3
+      }
+    },
+    {
+      "id": "3",
+      "title": "Angular Performance",
+      "description": "Optimize your Angular applications",
+      "duration": "3 hours",
+      "level": "intermediate",
+      "isOfficial": true,
+      "image": "assets/angular_performance.webp",
+      "courseStats": {
+        "difficulty": 5,
+        "actualization": 7,
+        "utility": 8
+      }
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
