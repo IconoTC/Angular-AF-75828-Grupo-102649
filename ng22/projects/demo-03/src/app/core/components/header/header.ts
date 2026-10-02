@@ -1,11 +1,12 @@
-import { Component, input, signal } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { User } from '../user/user';
 import { Separator } from '../separator/separator';
 import { Toggle } from '../toggle/toggle';
 import { Search } from '../search/search';
+import { CourseBadge } from '../../../features/courses/components/course-badget/course-badget';
 
 @Component({
-  imports: [User, Separator, Toggle, Search],
+  imports: [User, Separator, Toggle, Search, CourseBadge],
   selector: 'ind-header',
   styles: `
     :host {
@@ -87,6 +88,7 @@ import { Search } from '../search/search';
         </div>
         <div class="system-icons">
           <ind-toggle />
+          <ind-course-badget />
         </div>
       </div>
       <div class="bottom-row">
@@ -107,6 +109,7 @@ import { Search } from '../search/search';
 })
 export class Header {
   readonly title = input('Title', {
+    // eslint-disable-next-line @angular-eslint/no-input-rename
     alias: 'app-title',
   });
   readonly subtitle = input.required<string>();

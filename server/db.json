@@ -41,6 +41,20 @@
         "actualization": 7,
         "utility": 8
       }
+    },
+    {
+      "title": "Docker",
+      "description": "Ejemplo de curso",
+      "image": "",
+      "isOfficial": false,
+      "duration": "20 horas",
+      "level": "beginner",
+      "courseStats": {
+        "actualization": 5,
+        "difficulty": 5,
+        "utility": 5
+      },
+      "id": "j66l24L-hLs"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

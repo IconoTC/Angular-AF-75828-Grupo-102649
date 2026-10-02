@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Header } from '../header/header';
 import { Footer } from '../footer/footer';
@@ -7,16 +7,10 @@ import { Card } from '../../design/card/card';
 import { Menu } from '../menu/menu';
 import { MenuOption } from '../../types/menu-option';
 import { MENU_OPTIONS } from '../../../app.routes';
+import { CoursesStore } from '../../../features/courses/services/courses.store';
 
 @Component({
-  imports: [
-    RouterOutlet,
-    Header,
-    LogoCoders,
-    Menu,
-    Footer,
-    Card,
-  ],
+  imports: [RouterOutlet, Header, LogoCoders, Menu, Footer, Card],
   selector: 'ind-root',
   styles: `
     :host {
@@ -67,8 +61,14 @@ import { MENU_OPTIONS } from '../../../app.routes';
   `,
 })
 export class App {
+  readonly store = inject(CoursesStore);
+
   private readonly title = signal('Demo-03');
   private readonly subtitle = signal('Curso de Angular 22');
 
   private readonly menuItems = signal<MenuOption[]>(MENU_OPTIONS);
+
+  constructor() {
+    this.store.loadCourses();
+  }
 }

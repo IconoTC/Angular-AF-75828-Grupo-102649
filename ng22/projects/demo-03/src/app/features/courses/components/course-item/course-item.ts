@@ -1,5 +1,6 @@
-import { Component, input, output } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { Course } from '../../types/course';
+import { CoursesStore } from '../../services/courses.store';
 
 @Component({
   imports: [],
@@ -33,21 +34,19 @@ import { Course } from '../../types/course';
     <h3 [class.official]="course().isOfficial">{{ course().title }}</h3>
     <p>{{ course().description }}</p>
     <label><input type="checkbox" [checked]="course().isOfficial" (change)="onChangeEmit()" /> Official Course</label>
-    <button (click)="deleteEvent.emit(course())">Eliminar</button>
+    <button (click)="this.store.deleteCourse(this.course())">Eliminar</button>
   `,
 })
 export class CourseItem {
  readonly course = input.required<Course>();
-
- readonly changeEvent = output<Course>()
- readonly deleteEvent = output<Course>()
+ readonly store = inject(CoursesStore);
 
  onChangeEmit() {
     const updatedCourse: Course = {
       ...this.course(),
       isOfficial: !this.course().isOfficial,
     };
-    this.changeEvent.emit(updatedCourse);
+    this.store.updateCourse(updatedCourse);
   }
 
 }
