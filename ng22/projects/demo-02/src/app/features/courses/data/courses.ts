@@ -1,4 +1,5 @@
-import { Course } from "../types/course";
+import { delay, Observable, of, throwError } from 'rxjs';
+import { Course } from '../types/course';
 
 export const COURSES: Course[] = [
   {
@@ -8,11 +9,12 @@ export const COURSES: Course[] = [
     duration: '2 hours',
     level: 'beginner',
     image: 'assets/course_angular.webp',
+    isOfficial: true,
     courseStats: {
       difficulty: 7,
       actualization: 9,
-      utility: 8
-    }
+      utility: 8,
+    },
   },
   {
     id: 2,
@@ -20,11 +22,44 @@ export const COURSES: Course[] = [
     description: 'Dive deep into Angular',
     duration: '4 hours',
     level: 'advanced',
-    image: 'advanced-angular.jpg',
+    isOfficial: false,
+    image: 'assets/advanced_angular.webp',
     courseStats: {
       difficulty: 3,
       actualization: 3,
-      utility: 3
-    }
-  }
+      utility: 3,
+    },
+  },
+  {
+    id: 3,
+    title: 'Angular Performance',
+    description: 'Optimize your Angular applications',
+    duration: '3 hours',
+    level: 'intermediate',
+    isOfficial: true,
+    image: 'assets/angular_performance.webp',
+    courseStats: {
+      difficulty: 5,
+      actualization: 7,
+      utility: 8,
+    },
+  },
 ];
+
+
+
+
+export const getCoursesRx = (isOk= true): Observable<Course[]> => {
+  if (!isOk) {
+    return throwError(() => new Error('Failed to load courses'));
+  }
+  return of(COURSES).pipe(
+    delay(1000)
+  );
+};
+
+export const getCourses = (): Promise<Course[]> => new Promise((resolve) => {
+  setTimeout(() => {
+    resolve(COURSES);
+  }, 1000);   
+});

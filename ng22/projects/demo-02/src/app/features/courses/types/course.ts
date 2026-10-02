@@ -4,11 +4,12 @@ export interface Course {
   description: string;
   duration: string;
   level: 'beginner' | 'intermediate' | 'advanced';
+  isOfficial: boolean;
   image: string;
   courseStats: CourseStats;
 }
 
-export type CourseStats = {
+export interface CourseStats {
   difficulty: number;
   actualization: number;
   utility: number;
