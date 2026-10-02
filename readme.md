@@ -274,12 +274,12 @@ Curso de Angular 22, versión publicada el 3 de Junio de 2026.
 - Custom controls
   -  🧿Componente Input. [FormValueControl]
 
-## Día 5 (V-02/10). Arquitectura. Servicios repo (HTTP) y state 
+## ía 5 (V-02/10). Arquitectura. Servicios repo (HTTP) y state 
 
 - Feature Auth.
   - Rutas con estado. 🧿LoginPage y componente 🧿LoginInfo 
 
-<!-- - Arquitectura de componentes
+- Arquitectura de componentes
   - Componentes de contenedores vs de presentación.
   - Componentes inteligentes vs tontos.
 
@@ -287,32 +287,27 @@ Curso de Angular 22, versión publicada el 3 de Junio de 2026.
   - Entidad Courses. Modelo y mock de datos asíncrono.
   - Componente Courses-List. Lógica del estado
   - Componente Courses-Item. Input y Output (Eventos)
-  - Componente Courses-Form. Output (Eventos)  -->
+  - Componente Courses-Form. Output (Eventos)
 
- <!-- 
+
 - Servicios y patrón Repository
-  - Mock de datos. Interface de los repositorios
+  - Interface de los repositorios
   - Uso de promesas y observables (RxJS) en los servicios.
-
-- RxJS (Observables)
-  - Introducción. Observables, subscription, operadores.
-  - Los mismos repositorios usando RxJS (Observables). 
-  - Uso del repo en el componente   
+      - Promesas
+      - RxJS (Observables)
+        - Los mismos repositorios usando RxJS (Observables). 
 
 - API server fake basado en JSONServer.
   - Prueba con Postman
 
-- Uso de environments. 
--->
+- Uso de environments
 
-- [Descanso] 11:45 - 12:15
+- [Descanso] 11:40 - 12:10
 
 <!-- 
   - Servicio LocalNotesRepository: Repositorio y persistencia local (localStorage).
   - Uso en los componentes. Inyección de dependencias.
-
 -->
-
 
   <!-- - Testing de servicios.
     - Tests del servicio
@@ -321,34 +316,31 @@ Curso de Angular 22, versión publicada el 3 de Junio de 2026.
     - Testing de componentes con servicios (mocks y spies). -->
 
 
-<!-- - Introducción a los servicios HTTP en Angular.
-
-  - Repositorio y lógica de negocio (estado). Estrategias 
-  - Métodos CRUD. getAll() y getById()
-  - Métodos CRUD. add(), update(), delete()
-
-
-- Servicio HttpClientModule. Observables (RxJs).
+- Introducción a los servicios HTTP en Angular.
+- Servicio HttpClient. Observables (RxJs).
 
   - Creación de un ApiRepositoryService.
   - Antes de Angular 21: Configuración del servicio HTTP: provider
-  - Uso desde el componente (NoteList).   -->
+  - Métodos CRUD. getAll() y getById()
+  - Métodos CRUD. add(), update(), delete()
+
+  - Uso desde el componente (Courses-List). 
+    - Repositorio y lógica de negocio (estado). Estrategias 
 
 <!--
-- Servicio HttpClientModule. Observables (RxJs).
   - Tests de servicios HTTP con HttpTestingController
   - Test de componentes con servicios HTTP (mocks y spies).
 -->
 
-<!-- 
-- Servicios stateful: patrón Flux
+- Nuevo proyecto (app): demo-03.  
+  `ng g app demo-03 --style css --ssr false -p ind -t -s` 
 
+- Servicios stateful: patrón Flux
 
   - Estado con RxJS: Subjects
     - Estado privado con BehaviorSubject
     - Estado público con Observable (asObservable)
     - Métodos para modificar el estado (add, toggle, remove)
-  
   
   - Estado con Signals: signal (WriteableSignal) y readOnly/computed (Signal)
   
@@ -360,5 +352,3 @@ Curso de Angular 22, versión publicada el 3 de Junio de 2026.
 - Uso del estado desde los componentes ToDo...
 - Gestión de errores
 - Uso desde cualquier parte de la aplicación (Header) 
-
--->
