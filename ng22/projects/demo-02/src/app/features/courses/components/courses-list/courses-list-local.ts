@@ -1,11 +1,10 @@
 import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { CourseItem } from '../course-item/course-item';
 import { Course } from '../../types/course';
+import { getCoursesRx } from '../../data/courses';
 import { JsonPipe } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CourseForm } from '../course-form/course-form';
-import { CoursesApiRepo } from '../../services/courses.api.repo';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   imports: [CourseItem, CourseForm, JsonPipe],
@@ -39,11 +38,7 @@ import { HttpErrorResponse } from '@angular/common/http';
       <ul>
         @for (course of courses(); track course.id) {
           <li>
-            <ind-course-item
-              [course]="course"
-              (changeEvent)="updateCourse($event)"
-              (deleteEvent)="deleteCourse($event)"
-            />
+            <ind-course-item [course]="course" (changeEvent)="updateCourse($event)" (deleteEvent)="deleteCourse($event)" />
           </li>
         }
       </ul>
@@ -52,9 +47,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   `,
 })
 export class CoursesList {
-  readonly #repo = inject(CoursesApiRepo);
   readonly #destroyRef = inject(DestroyRef);
-
   readonly courses = signal<Course[]>([]);
   readonly error = signal<Error | null>(null);
   readonly isLoading = signal<boolean>(false);
@@ -66,72 +59,45 @@ export class CoursesList {
   loadCourses() {
     this.isLoading.set(true);
     this.error.set(null);
-    this.#repo
-      .getAll()
+    getCoursesRx()
       .pipe(takeUntilDestroyed(this.#destroyRef))
       .subscribe({
         next: (courses) => {
           this.courses.set(courses);
           this.isLoading.set(false);
         },
-        error: (error: HttpErrorResponse) => {
-          console.log(error);
+        error: (error: Error) => {
           this.error.set(error);
           this.isLoading.set(false);
         },
       });
   }
 
-  addCourse(data: Omit<Course, 'id'>) {
-    // asincrona -> backend (API)
-    this.#repo
-      .add(data)
-      .pipe(takeUntilDestroyed(this.#destroyRef))
-      .subscribe(
-        // sincrona -> Estado local (signal)
-        {
-        next: (course) => {
-          this.courses.update((courses) => [...courses, { ...course }]);
-        },
-        error: (error: HttpErrorResponse) => {
-          console.log(error);
-          this.error.set(error);
-        },
-      });
+  #generateId() {
+    return Math.floor(Math.random() * 1_000);
+  }
+
+  addCourse(data: Omit<Course, "id">) {
+    try {
+      this.courses.update((courses) => [...courses, { ...data, id: this.#generateId() }]);
+    } catch (error: unknown) {
+      this.error.set(error as Error);
+    }
   }
 
   updateCourse(data: Course) {
-    const {id, ...rest} = data; 
-    this.#repo
-      .updateById(id, rest)
-      .pipe(takeUntilDestroyed(this.#destroyRef))
-      .subscribe({
-        next: (course) => {
-          this.courses.update((courses) =>
-            courses.map((c) => (c.id === course.id ? course : c)),
-          );
-        },
-        error: (error: HttpErrorResponse) => {
-          console.log(error);
-          this.error.set(error);
-        },
-      });
+    try {
+      this.courses.update((courses) => courses.map((course) => (course.id === data.id ? data : course)));
+    } catch (error: unknown) {
+      this.error.set(error as Error);
+    }
   }
-
+  
   deleteCourse(data: Course) {
-
-
-    this.#repo
-      .deleteById(data.id)
-      .pipe(takeUntilDestroyed(this.#destroyRef))
-      .subscribe({
-        next: () => {
-           this.courses.update((courses) => courses.filter((course) => course.id !== data.id));
-        },
-        error: (error: HttpErrorResponse) => {
-          console.log(error);
-          this.error.set(error);
-        }
-      });
+    try {
+      this.courses.update((courses) => courses.filter((course) => course.id !== data.id));
+    } catch (error: unknown) {
+      this.error.set(error as Error);
+    }
   }
 }

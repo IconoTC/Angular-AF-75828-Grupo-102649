@@ -12,6 +12,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes, withComponentInputBinding()),
+    // provideHttpClient(withFetch()),
     {
       provide: ERROR_LEVEL,
       useValue: environment.loggerLevel,
